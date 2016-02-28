@@ -1,0 +1,22 @@
+{{set . "title" "Home"}}
+{{template "header.html" .}}
+
+<div class="container">
+	<h1>Instrucciones</h1>
+
+	<p>Antes de seleccionar un archivo verifique que cumple con las siguientes restricciones:</p>
+	<p>Los numeros decimales deben ir con un . en vez de ,</p>
+	<p>Los números deben ir separados por , (coma)</p>
+	<p>El archivo debe finalizar con (,) de lo contrario no se contara el último número</p>
+	<p>Si existe algún error en el formato del archivo, solo se procesarán los numeros que están bien formados</p>
+	<p>Debe ingresar por lo menos 2 números</p>
+	<h2>Ejemplo</h2>
+	<p>3.8,9.0,8.2,7.9,</p>
+
+
+	<a href="/" class="btn btn-primary">Volver al formulario</a>
+</div>
+
+
+{{template "footer.html" .}}
+

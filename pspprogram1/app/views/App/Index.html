@@ -1,0 +1,33 @@
+{{set . "title" "Home"}}
+{{template "header.html" .}}
+
+<header class="hero-unit" style="background-color:#A9F16C">
+  <div class="container">
+      <div class="hero-text">
+        <h1>{{.greeting}}</h1>
+        <p></p>
+    </div>
+</header>
+<div class="container">
+     {{template "flash.html" .}}
+      <form action="/App/Estadistica" method="POST" role="form" enctype="multipart/form-data" class="">
+          
+           <div class="form-group">
+              <label class="control-label col-sm-2" for="archivo">Sube un archivo:</label>
+              <div class="col-sm-10">
+                {{with $field := field "archivo" .}}
+                  <input type="file" name="{{$field.Name}}" id="archivo" class="form-control">
+                {{end}}
+              </div>
+          </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Calcular</button>
+        </div>
+        
+         
+      </form>
+
+</div>
+
+{{template "footer.html" .}}

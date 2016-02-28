@@ -1,0 +1,22 @@
+{{set . "title" "Estadistica"}}
+{{template "header.html" .}}
+<div class="container">
+ <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Media</th>
+        <th>Desviación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{.media}}</td>
+        <td>{{.desv}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <a href="/" class="btn btn-default">Volver al formulario</a>
+</div>
+
+
+{{template "footer.html" .}}
