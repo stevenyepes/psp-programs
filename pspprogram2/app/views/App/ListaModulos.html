@@ -1,0 +1,27 @@
+{{set . "title" "Home"}}
+{{template "header.html" .}}
+<div class="container">
+ <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Archivo</th>
+        <th>Numero de Funciones</th>
+        <th>Tamaño</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range .modulos}}
+	      <tr>	
+		    	<td>{{.Nombre}}</td>
+		    	<td>{{.Funciones}}</td>
+		    	<td>{{.Size}}</td>
+	      </tr>
+      {{end}}
+      <td>Total</td>
+      <td></td>
+      <td>{{.total}}</td>
+    </tbody>
+  </table>
+  <a href="/" class="btn btn-default">Volver al formulario</a>
+</div>
+{{template "footer.html" .}}

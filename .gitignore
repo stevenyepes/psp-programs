@@ -1,3 +1,6 @@
-test-results/
-tmp/
-routes/
+pspprogram1/test-results/
+pspprogram1/tmp/
+pspprogram1/routes/
+pspprogram2/test-results/
+pspprogram2/tmp/
+pspprogram2/routes/
