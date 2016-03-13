@@ -4,10 +4,10 @@
 
 <header class="hero-unit">
   <div class="container">
-    
-    <h1>PSP Program 2</h1>
+
+    <h1>{{.greeting}}</small></h1>
   </div>
-        
+
 </header>
 <br>
 <div class="container">
@@ -15,9 +15,9 @@
     <div class="">
       {{template "flash.html" .}}
       <form action="/App/ListaModulos" method="POST" role="form" enctype="multipart/form-data" class="">
-          
+
            <div class="form-group">
-              <label class="control-label" for="archivo">Ingresa un directorio:</label>
+              <label class="control-label" for="archivo">Ingresa el directorio de tu programa Go:</label>
               <div class="">
                 {{with $field := field "archivo" .}}
                   <input type="text" name="{{$field.Name}}" id="archivo" class="form-control">
@@ -27,11 +27,11 @@
 
         <div class="form-group">
           <button type="submit" class="btn btn-button">Calcular</button>
-        </div> 
-         
+        </div>
+
       </form>
     </div>
-     
+
 
 </div>
 

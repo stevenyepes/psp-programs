@@ -8,19 +8,14 @@ import (
 	"strings"
 )
 
-/*
-	Representa un módulo del programa
-*/
+// Modulo estructura de un módulo del programa
 type Modulo struct {
 	Nombre    string `json:"nombre"`
 	Size      int    `json:"size"`
 	Funciones int    `json:"funciones"`
 }
 
-/*
-	Esta funcion recibe un path root (ruta raiz del proyecto) y devuelve un arreglo de
-	string con las rutas a todos los archivos .go dentro del proyecto
-*/
+//addFiles Esta funcion recibe un path root (ruta raiz del proyecto) y devuelve un arreglo de string con las rutas a todos los archivos .go dentro del proyecto
 func addFiles(root string) ([]string, error) {
 
 	r, _ := regexp.Compile("\\.go")
@@ -44,10 +39,7 @@ func addFiles(root string) ([]string, error) {
 	return fileList, err
 }
 
-/*
-	Esta funcion devuelve un arreglo de modulos(partes del programa), cada módulo contiene su
-	nombre, el numero de funciones y su tamaño
-*/
+// ObtenerModulos Esta funcion devuelve un arreglo de modulos(partes del programa), cada módulo contiene su nombre, el numero de funciones y su tamaño
 func ObtenerModulos(path string) ([]Modulo, int, error) {
 
 	modulos := []Modulo{}
@@ -74,19 +66,17 @@ func ObtenerModulos(path string) ([]Modulo, int, error) {
 	return modulos, total, nil
 }
 
-/*
-	Esta función devuelve el numero de lineas y el numero de funciones de un arreglo de bytes
-*/
+// contarLineas Esta función devuelve el numero de lineas y el numero de funciones de un arreglo de bytes
 func contarLineas(data []byte) (lineas int, nfunciones int) {
 
 	regFunc, _ := regexp.Compile("(func) .")                                          // expresión regular para una funcion
-	regvar1, _ := regexp.Compile("([a-z]+[0-9]* *,* *):=")                            // expresión regular para una declaracion de variable
-	regvar2, _ := regexp.Compile("(var +[a-z]+[0-9]* *)[a-z]+")                       // expresión regular para una declaracion de variable
-	regasig, _ := regexp.Compile("([a-z]+[0-9]* *)= *.")                              // expresión regular para una asignación
-	regProp, _ := regexp.Compile("[a-z]+\\.")                                         // expresión regular para una propiedad, ejem : fmt.Println()
-	regCall, _ := regexp.Compile("[a-z]+\\(")                                         // expresión regular para la llamada a una función, ejem : contarPalabras()
+	regvar1, _ := regexp.Compile("([a-z|A-Z]+[0-9]* *,* *):=")                        // expresión regular para una declaracion de variable
+	regvar2, _ := regexp.Compile("var +[a-z|A-Z]+[0-9]* *[a-z|A-Z]+")                 // expresión regular para una declaracion de variable
+	regasig, _ := regexp.Compile("([a-z|A-Z]+[0-9]* *)= *.")                          // expresión regular para una asignación
+	regProp, _ := regexp.Compile("[a-z|A-Z]+\\.")                                     // expresión regular para una propiedad, ejem : fmt.Println()
+	regCall, _ := regexp.Compile("[a-z|A-Z]+[0-9]*\\(")                               // expresión regular para la llamada a una función, ejem : contarPalabras()
 	regCom, _ := regexp.Compile("return|if|for|type|package|switch|case|else|\\_|\"") // expresión regular para los tipos mencionados
-
+	regComent, _ := regexp.Compile("//")
 	modulo := string(data)
 	lineasCodigo := 0
 	funciones := 0
@@ -94,7 +84,7 @@ func contarLineas(data []byte) (lineas int, nfunciones int) {
 	for _, c := range modulo {
 
 		if c == '\n' {
-			if strings.Trim(linea, " \r)}") != "" {
+			if strings.Trim(linea, " \r)}") != "" && !regComent.MatchString(linea) {
 
 				switch true {
 

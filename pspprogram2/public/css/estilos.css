@@ -1,14 +1,18 @@
 .hero-unit {
-	background: #461F21;
+	background: #6A7389;
 	color: #fff;
 }
 
 footer{
-	background: #BD1329;
+	background: #B0B5C4;
 	color: #fff;
 }
 
 .btn-button{
-	background: #FD6150;
+	background: #DFE8FC;
 	color: #461F21;
+}
+
+.navbar-fixed-bottom{
+	background: #B0B5C4;
 }

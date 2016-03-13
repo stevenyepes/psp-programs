@@ -6,22 +6,18 @@ import (
 	"testing"
 )
 
-/*
-	Test para verificar que se listen los archivos de un directorio
-*/
+// Test para verificar que se listen los archivos de un directorio
 func TestAddfiles(t *testing.T) {
 
 	_, error := addFiles("C:/Users/Steven/go_projects/src/github.com/stevenyepes/pspprograms/pspprogram1")
 
 	if error != nil {
 
-		t.Errorf("Error, se esperaba %q en la variable error, se obtuvo %q", nil, error)
+		t.Errorf("Error, se esperaba err nul en la variable error, se obtuvo %q", error)
 	}
 }
 
-/*
-	Test para verificar que se listen solo los archivos .go
-*/
+// Test para verificar que se listen solo los archivos .go
 func TestAddfilesJustGo(t *testing.T) {
 
 	files, error := addFiles("C:/Users/Steven/go_projects/src/github.com/stevenyepes/pspprograms/pspprogram1")
@@ -38,9 +34,7 @@ func TestAddfilesJustGo(t *testing.T) {
 	}
 }
 
-/*
-	Test para verificar la función contar lineas
-*/
+//Test para verificar la función contar lineas
 func TestContarLineas(t *testing.T) {
 
 	data, _ := ioutil.ReadFile("C:/Users/Steven/Downloads/UdeA-PS-Prog2/UdeA-PS-Prog2/archivo.go")
@@ -52,9 +46,7 @@ func TestContarLineas(t *testing.T) {
 
 }
 
-/*
-	Test para verificar que se cuenten todos los archivos .go de un proyecto
-*/
+// Test para verificar que se cuenten todos los archivos .go de un proyecto
 func TestObtenerModulos(t *testing.T) {
 
 	_, _, err := ObtenerModulos("C:/Users/Steven/Downloads/UdeA-PS-Prog2/UdeA-PS-Prog2/project")
