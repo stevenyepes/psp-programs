@@ -1,0 +1,39 @@
+{{set . "title" "Home"}}
+{{template "header.html" .}}
+<div class="container">
+
+        <table class="table table-striped">
+           <thead>
+             <tr>
+               <th>Xi</th>
+               <th>Yi</th>
+             </tr>
+           </thead>
+           <tbody>
+             {{range .pareja}}
+       	      <tr>
+       		    	<td>{{.DatoX}}</td>
+                <td>{{.DatoY}}</td>
+       	      </tr>
+             {{end}}
+           </tbody>
+         </table>
+  <a href="/" class="btn btn-default">Volver al formulario</a>
+
+  <form action="/App/Resultados" method="POST" role="form"  class="">
+
+       <div class="form-group">
+          <label class="control-label" for="archivo">Ingresa X:</label>
+          <div class="">
+            {{with $field := field "xParametro" .}}
+              <input type="text" name="{{$field.Name}}" id="xParametro" class="form-control">
+            {{end}}
+          </div>
+      </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-button">Calcular</button>
+    </div>
+  </form>
+</div>
+{{template "footer.html" .}}

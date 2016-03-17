@@ -61,7 +61,7 @@ func Sumatoria(lista *listaligada.ListaLigada) (float64, error) {
 
 // Xpory recibe una pareja y devuelve una lista con la multiplicación de cada
 // dato con su correspondiente relación
-func Xpory(pareja *Pareja) (*listaligada.ListaLigada, error) {
+func Xpory(pareja Pareja) (*listaligada.ListaLigada, error) {
 
 	if pareja.DatosX.Len() == 0 || pareja.DatosY.Len() == 0 {
 		return nil, errors.New("Las listas no pueden estar vacías")
@@ -93,23 +93,23 @@ func ListaCuadrado(lista *listaligada.ListaLigada) (*listaligada.ListaLigada, er
 	listaCuadrado := new(listaligada.ListaLigada)
 	for i := 0; i < lista.Len(); i++ {
 		xcuadrado := math.Pow(lista.Get(i).(float64), 2)
-		lista.Push(xcuadrado)
+		listaCuadrado.Push(xcuadrado)
 	}
 
 	return listaCuadrado, nil
 
 }
 
-// BetaParametros recibe una pareja y calcula el parámetro b1 y b0
+// BetaParametros recibe una pareja y calcula el parámetro b1,b0  y yk
 // para calcular la regresión lineal
-func BetaParametros(pareja *Pareja) (float64, float64, error) {
+func BetaParametros(pareja Pareja, xParametro float64) (float64, float64, float64, error) {
 
 	if pareja.DatosX.Len() == 0 || pareja.DatosY.Len() == 0 {
-		return 0.0, 0.0, errors.New("Las listas no pueden estar vacías")
+		return 0.0, 0.0, 0.0, errors.New("Las listas no pueden estar vacías")
 	}
 
 	if pareja.DatosX.Len() != pareja.DatosY.Len() {
-		return 0.0, 0.0, errors.New("El numero de datos de ambas listas debe ser igual")
+		return 0.0, 0.0, 0.0, errors.New("El numero de datos de ambas listas debe ser igual")
 	}
 
 	n := float64(pareja.DatosX.Len())
@@ -117,12 +117,12 @@ func BetaParametros(pareja *Pareja) (float64, float64, error) {
 	xpory, err1 := Xpory(pareja)
 	if err1 != nil {
 
-		return 0.0, 0.0, err1
+		return 0.0, 0.0, 0.0, err1
 	}
 
 	sumaXporY, err2 := Sumatoria(xpory)
 	if err2 != nil {
-		return 0.0, 0.0, err2
+		return 0.0, 0.0, 0.0, err2
 	}
 
 	mediax := Media(pareja.DatosX)
@@ -134,13 +134,15 @@ func BetaParametros(pareja *Pareja) (float64, float64, error) {
 	beta1 := (sumaXporY - n*(mediax*mediay)/(sumaxcuadrado-(n*math.Pow(mediax, 2))))
 
 	beta0 := mediay - beta1*mediax
-	return beta1, beta0, nil
+
+	ysubk := beta0 - beta1*xParametro
+	return beta1, beta0, ysubk, nil
 
 }
 
 // CoeficienteR recibe una pareja y devuelve el coeficiente de correlación 'r'
 // y 'r^2'
-func CoeficienteR(pareja *Pareja) (float64, float64, error) {
+func CoeficienteR(pareja Pareja) (float64, float64, error) {
 
 	if pareja.DatosX.Len() == 0 || pareja.DatosY.Len() == 0 {
 		return 0.0, 0.0, errors.New("Las listas no pueden estar vacías")

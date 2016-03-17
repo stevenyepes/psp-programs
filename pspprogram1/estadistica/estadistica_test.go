@@ -122,3 +122,75 @@ func TestDesvEstandarPSPData2(t *testing.T) {
 		t.Errorf("Error, se esperaba %f al obtener la desviación estandar, se obtuvo %f", 62.255831, Desviacion(lista))
 	}
 }
+
+func TestSumatoria(t *testing.T) {
+	lista := new(listaligada.ListaLigada)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	suma, _ := Sumatoria(lista)
+
+	if suma != 10.0 {
+		t.Errorf("Error, se esperaba %f al obtener la sumatria, se obtuvo %f", 10.0, suma)
+	}
+}
+
+func TestXporY(t *testing.T) {
+	lista := new(listaligada.ListaLigada)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(2.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+
+	lista2 := new(listaligada.ListaLigada)
+	lista2.Push(1.0)
+	lista2.Push(1.0)
+	lista2.Push(1.0)
+	lista2.Push(2.0)
+	lista2.Push(1.0)
+	lista2.Push(1.0)
+	lista2.Push(1.0)
+	lista2.Push(1.0)
+	lista2.Push(1.0)
+	lista2.Push(1.0)
+	pareja := Pareja{lista, lista2}
+
+	xpory, _ := Xpory(pareja)
+	suma, _ := Sumatoria(xpory)
+	if suma != 13.0 {
+		t.Errorf("Error, se esperaba %f al obtener la sumatria, se obtuvo %f", 10.0, suma)
+	}
+}
+
+func TestListaCuadrado(t *testing.T) {
+	lista := new(listaligada.ListaLigada)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(2.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+	lista.Push(1.0)
+
+	listacuadrado, _ := ListaCuadrado(lista)
+	suma, _ := Sumatoria(listacuadrado)
+	if suma != 13.0 {
+		t.Errorf("Error, se esperaba %f al obtener la sumatria, se obtuvo %f", 13.0, suma)
+	}
+}

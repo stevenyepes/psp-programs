@@ -1,0 +1,27 @@
+{{set . "title" "Home"}}
+{{template "header.html" .}}
+<div class="container">
+
+        <table class="table table-striped">
+           <thead>
+             <tr>
+               <th>B1</th>
+               <th>B2</th>
+               <th>Yk</th>
+               <th>R</th>
+               <th>R^2</th>
+             </tr>
+           </thead>
+           <tbody>
+       	      <tr>
+       		    	<td>{{.beta1}}</td>
+                <td>{{.beta0}}</td>
+                <td>{{.yk}}</td>
+                <td>{{.r}}</td>
+                <td>{{.r2}}</td>
+       	      </tr>
+           </tbody>
+         </table>
+  <a href="/" class="btn btn-default">Volver al formulario</a>
+</div>
+{{template "footer.html" .}}
